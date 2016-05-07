@@ -8,7 +8,6 @@ class App extends React.Component {
     };
   }
   onClickVideo(video) {
-    console.log(video);
     this.setState({
       currentVideo: video
     });
