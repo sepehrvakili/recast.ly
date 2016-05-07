@@ -1,15 +1,15 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // searchYouTube();
     this.state = {
-      currentVideo: {exampleVideoData[0]},
-      videos: {exampleVideoData}
-    }
+      currentVideo: exampleVideoData[0],
+      videos: exampleVideoData
+    };
   }
-  onClickVideo(event) {
-    console.log('click');
+  onClickVideo(clicked) {
     this.setState({
-      currentVideo: 'test' 
+      currentVideo: clicked
     });
   }
   render() {
@@ -20,7 +20,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videos} onClickVideo1={()=>console.log('testApp').bind(this)}/>
+          <VideoList videos={this.state.videos} onClickVideo1={this.onClickVideo.bind(this)}/>
         </div>
       </div>
     );
