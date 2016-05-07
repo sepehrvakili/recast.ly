@@ -1,7 +1,6 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // searchYouTube();
     this.state = {
       currentVideo: exampleVideoData[0],
       videos: exampleVideoData
@@ -11,6 +10,13 @@ class App extends React.Component {
     this.setState({
       currentVideo: clicked
     });
+  }
+  componentDidMount() {
+    this.props.searchYouTube({q: 'react', max: 5, key: window.YOUTUBE_API_KEY}, (data) => {});
+    // this.setState = {
+    //   videos: videoData,
+    //   currentVideo: videoData[0]
+    // };
   }
   render() {
     return (
@@ -30,3 +36,4 @@ class App extends React.Component {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
+// window.searchYouTube({});

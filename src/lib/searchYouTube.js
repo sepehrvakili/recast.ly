@@ -3,17 +3,16 @@ var searchYouTube = (options, callback) => {
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',
-    // dataType: 'JSON',
+    dataType: 'JSON',
     data: {
       part: 'snippet',
       type: 'video',
-      maxResults: options.max,
+      maxResults: options.max || 5,
       q: options.query,
       key: options.key
     },
     success: (data) => {
-      console.log(data);
-      callback(data.items);
+      return callback(data.items);
     },
     error: (XHR, textStatus, errorThrown) => {
       console.log(`There was an ${XHR.status} and ${errorThrown}, ${textStatus}`);
