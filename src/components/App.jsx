@@ -2,32 +2,36 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentVideo: exampleVideoData[0],
-      videos: exampleVideoData,
+      currentVideo: window.exampleVideoData[0],
+      videos: [],
       query: ''
     };
   }
-  onClickVideo(video) {
+  handleVideoEntryClick(video) {
     this.setState({
       currentVideo: video
     });
   }
-  fetchData(query) {
-    this.props.searchYouTube({query: query, max: 5, key: window.YOUTUBE_API_KEY}, (data) => {
+  fetchVideos(query) {
+    var options = {
+      query: query,
+      key: this.props.API_KEY
+    }
+    this.props.searchYouTube(options, (videos) => {
       this.setState({
-        currentVideo: data[0],
-        videos: data
+        currentVideo: videos[0],
+        videos: videos
       });
     });
   }
   handleSearch(query) {
     var searchText = query.target.value;
     _.debounce(() => {
-      this.fetchData(searchText);
+      this.fetchVideos(searchText);
     }, 500)();
   }
   componentDidMount() {
-    this.fetchData('javascript');
+    this.fetchVideos('cancion del mariachi');
   }
   render() {
     return (
@@ -37,7 +41,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videos} onClickVideo={this.onClickVideo.bind(this)}/>
+          <VideoList videos={this.state.videos} handleVideoEntryClick={this.handleVideoEntryClick.bind(this)}/>
         </div>
       </div>
     );

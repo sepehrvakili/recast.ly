@@ -1,4 +1,4 @@
-var searchYouTube = (options, callback) => {
+var searchYouTube = ({key, query, max = 5}, callback) => {
 
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
@@ -7,9 +7,9 @@ var searchYouTube = (options, callback) => {
     data: {
       part: 'snippet',
       type: 'video',
-      maxResults: options.max || 5,
-      q: options.query,
-      key: options.key
+      maxResults: max,
+      q: query,
+      key: key
     },
     success: (data) => {
       callback(data.items);
