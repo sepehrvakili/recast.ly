@@ -12,7 +12,7 @@ var searchYouTube = (options, callback) => {
       key: options.key
     },
     success: (data) => {
-      return callback(data.items);
+      callback(data.items);
     },
     error: (XHR, textStatus, errorThrown) => {
       console.log(`There was an ${XHR.status} and ${errorThrown}, ${textStatus}`);

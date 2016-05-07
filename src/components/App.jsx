@@ -12,11 +12,12 @@ class App extends React.Component {
     });
   }
   componentDidMount() {
-    this.props.searchYouTube({q: 'react', max: 5, key: window.YOUTUBE_API_KEY}, (data) => {});
-    // this.setState = {
-    //   videos: videoData,
-    //   currentVideo: videoData[0]
-    // };
+    this.props.searchYouTube({q: 'react', max: 5, key: window.YOUTUBE_API_KEY}, (data) => {
+      this.setState({
+        currentVideo: data[0],
+        videos: data
+      });
+    });
   }
   render() {
     return (
